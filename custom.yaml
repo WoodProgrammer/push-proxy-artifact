@@ -1,0 +1,8 @@
+prometheus:
+  enabled: true
+  prometheus.yml:
+    scrape_configs:
+    - job_name: node
+      proxy_url: http://external_proxy:8080/
+      static_configs:
+        - targets: ['fqdn:9100']
