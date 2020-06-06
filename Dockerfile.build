@@ -1,0 +1,9 @@
+FROM golang:1.14.4 as builder
+WORKDIR /tmp/pushprox/
+COPY . .
+RUN make build
+
+FROM ubuntu
+COPY --from=builder /tmp/pushprox/pushprox-client /usr/local/bin/pushprox-client
+COPY --from=builder /tmp/pushprox/pushprox-proxy /usr/local/bin/pushprox-proxy
+
